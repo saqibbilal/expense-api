@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 
 import { Expense } from './entities/expense.entity';
 import { CreateExpenseDto } from './dto/create-expense.dto';
+import { UpdateExpenseDto } from './dto/update-expense.dto';
 
 @Injectable()
 export class ExpensesService {
@@ -21,5 +22,15 @@ export class ExpensesService {
 
   async findAll() {
     return await this.expenseRepository.find();
+  }
+  async findOne(id: number) {
+    return await this.expenseRepository.findOneBy({ id });
+  }
+  async update(id: number, updateExpenseDto: UpdateExpenseDto) {
+    await this.expenseRepository.update(id, updateExpenseDto);
+    return await this.findOne(id);
+  }
+  async remove(id: number) {
+    return await this.expenseRepository.delete(id);
   }
 }

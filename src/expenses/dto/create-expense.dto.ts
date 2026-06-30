@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
+import { IsString, IsNumber, IsNotEmpty, Min } from 'class-validator';
 
 export class CreateExpenseDto {
   @IsString()
@@ -6,5 +6,6 @@ export class CreateExpenseDto {
   description: string;
 
   @IsNumber()
+  @Min(0)
   amount: number;
 }
